@@ -55,7 +55,6 @@ const handleNoteSave = function () {
     title: $noteTitle.val(),
     text: $noteText.val(),
   };
-  console.log(newNote);
 
   saveNote(newNote).then(() => {
     getAndRenderNotes();
@@ -150,4 +149,3 @@ $noteText.on("keyup", handleRenderSaveBtn);
 
 // Gets and renders the initial list of notes
 getAndRenderNotes();
-console.log(activeNote);
