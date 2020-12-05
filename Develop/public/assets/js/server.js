@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 8000;
 //express app to handle data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public'));
 //empty notes array to push/filter to
 let notes = [];
 //route to HTML pages
@@ -48,3 +49,5 @@ app.delete("/api/notes/:id", function(req, res) {
 app.listen(PORT, () => {
     console.log("App listening at http://localhost:" + PORT);
 });
+
+module.exports = notes;
