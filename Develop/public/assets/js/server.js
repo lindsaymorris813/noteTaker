@@ -13,15 +13,15 @@ app.use(express.json());
 let notes = [];
 //route to HTML pages
 app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "index.html"));
+    res.sendFile(path.join(__dirname, "../../index.html"));
 });
 
 app.get("/notes", function(req, res) {
-    res.sendFile(path.join(__dirname, "notes.html"));
+    res.sendFile(path.join(__dirname, "../../notes.html"));
 });
 //anything not designated routed to index.html
 app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "index.html"));
+    res.sendFile(path.join(__dirname, "../../index.html"));
 });
 //route for API of notes using database data
 app.get("/api/notes", function(req, res) {
