@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
-const uuid = require('uuid');
 const fs = require('fs');
+const uuid = require('uuid');
+
 const app = express();
 const PORT = process.env.PORT || 8000;
 
@@ -17,8 +18,8 @@ app.get("/notes", function(req, res) {
 
 app.get("/api/notes", function(req, res) {
     notes = JSON.parse(fs.readFileSync("db/db.json"));
-    res.json(notes)
- })
+    res.json(notes);
+});
 
 app.get("*", function(req, res) {
     res.sendFile(path.join(__dirname, "index.html"));
