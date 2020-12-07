@@ -32,6 +32,7 @@ app.get("*", function(req, res) {
 
 //post to API notes
 app.post("/api/notes", function(req, res) {
+    notes = JSON.parse(fs.readFileSync("db/db.json"));
     let newNote = {
         title: req.body.title,
         text: req.body.text,
@@ -43,7 +44,8 @@ app.post("/api/notes", function(req, res) {
     res.json(newNote);
 })
 //delete entry from API notes using unique ID
-app.delete("/api/notes/:id", function(req, res) {;
+app.delete("/api/notes/:id", function(req, res) {
+    notes = JSON.parse(fs.readFileSync("db/db.json"));
     notes = notes.filter(note => note.id !== req.params.id)
     fs.writeFileSync("db/db.json", JSON.stringify(notes));
     res.json(notes);
