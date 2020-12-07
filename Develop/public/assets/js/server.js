@@ -20,15 +20,16 @@ app.get("/", function(req, res) {
 app.get("/notes", function(req, res) {
     res.sendFile(path.join(__dirname, "../../notes.html"));
 });
-//anything not designated routed to index.html
-app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "../../index.html"));
-});
 //route for API of notes using database data
 app.get("/api/notes", function(req, res) {
     notes = JSON.parse(fs.readFileSync("db/db.json"));
     res.json(notes);
 });
+//anything not designated routed to index.html
+app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "../../index.html"));
+});
+
 //post to API notes
 app.post("/api/notes", function(req, res) {
     let newNote = {
@@ -42,8 +43,10 @@ app.post("/api/notes", function(req, res) {
     res.json(newNote);
 })
 //delete entry from API notes using unique ID
-app.delete("/api/notes/:id", function(req, res) {
-    res.json(notes.filter(note => note.id !== parseInt(req.params.id)));
+app.delete("/api/notes/:id", function(req, res) {;
+    notes = notes.filter(note => note.id !== req.params.id)
+    fs.writeFileSync("db/db.json", JSON.stringify(notes));
+    res.json(notes);
 })
 //listener for port
 app.listen(PORT, () => {
